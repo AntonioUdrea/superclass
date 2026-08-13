@@ -11,6 +11,23 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.png">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Google Analytics is loaded only after analytics consent. -->
+    <script>
+        function enableAnalytics() {
+            if (window.analyticsLoaded) return;
+            window.analyticsLoaded = true;
+
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YESTMQPWCL';
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date());
+            gtag('config', 'G-YESTMQPWCL');
+        }
+    </script>
     <style>
         @keyframes gradientShift {
             0% {
@@ -64,9 +81,15 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6 font-bold text-sm tracking-wide uppercase">
-                    <a href="index.html" class="text-violet-600 border-b-4 border-violet-500 pb-1">Acasă</a>
-                    <a href="cursuri.html" class="text-slate-600 hover:text-violet-600 transition">Cursuri</a>
-                    <a href="contact.html" class="text-slate-600 hover:text-violet-600 transition">Contact</a>
+                    <a href="index.html"
+                        class="nav-link text-slate-600 hover:text-violet-600 transition"
+                        data-page="index.html">Acasă</a>
+                    <a href="cursuri.html"
+                        class="nav-link text-slate-600 hover:text-violet-600 transition"
+                        data-page="cursuri.html">Cursuri</a>
+                    <a href="contact.html"
+                        class="nav-link text-slate-600 hover:text-violet-600 transition"
+                        data-page="contact.html">Contact</a>
                 </div>
 
                 <!-- Hamburger Button -->
@@ -80,9 +103,15 @@
 
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 flex flex-col space-y-4 font-bold uppercase text-sm">
-                <a href="index.html" class="text-violet-600">Acasă</a>
-                <a href="cursuri.html" class="text-slate-600 hover:text-violet-600">Cursuri</a>
-                <a href="contact.html" class="text-slate-600 hover:text-violet-600">Contact</a>
+                <a href="index.html"
+                    class="mobile-nav-link text-slate-600 hover:text-violet-600"
+                    data-page="index.html">Acasă</a>
+                <a href="cursuri.html"
+                    class="mobile-nav-link text-slate-600 hover:text-violet-600"
+                    data-page="cursuri.html">Cursuri</a>
+                <a href="contact.html"
+                    class="mobile-nav-link text-slate-600 hover:text-violet-600"
+                    data-page="contact.html">Contact</a>
             </div>
 
         </div>
@@ -95,6 +124,39 @@
         menuBtn.addEventListener("click", () => {
             mobileMenu.classList.toggle("hidden");
         });
+
+        // Highlight the navigation item for the page currently being viewed.
+        (function setActiveNavigation() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const isActive = link.dataset.page === currentPage;
+
+                link.classList.toggle('text-violet-600', isActive);
+                link.classList.toggle('border-b-4', isActive);
+                link.classList.toggle('border-violet-500', isActive);
+                link.classList.toggle('pb-1', isActive);
+
+                if (isActive) {
+                    link.classList.remove('text-slate-600');
+                } else {
+                    link.classList.add('text-slate-600');
+                }
+            });
+
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                const isActive = link.dataset.page === currentPage;
+
+                link.classList.toggle('text-violet-600', isActive);
+                link.classList.toggle('font-black', isActive);
+
+                if (isActive) {
+                    link.classList.remove('text-slate-600');
+                } else {
+                    link.classList.add('text-slate-600');
+                }
+            });
+        })();
     </script>
 
     <header
@@ -124,11 +186,15 @@
     </header>
 
     <main class="max-w-8xl mx-auto px-6 py-20">
-        <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-slate-900 animate__animated animate__fadeIn">Cursuri de limbi străine predate de profesori acreditați internațional</h2>
-        <p class="text-center text-slate-500 mb-16 font-medium max-w-md mx-auto"><br><b>De la prima ședință ești ghidat pas cu pas de profesori cu peste 25 ani experiență în predarea limbilor străine în România și Marea Britanie.</b><br><br> La Centrul Educațional Superclass, transformăm învățarea într-un proces clar și structurat, adaptat stilului și ritmului tău, astfel încât să îți atingi obiectivele propuse.</p>
+        <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-slate-900 animate__animated animate__fadeIn">
+            Cursuri de limbi străine predate de profesori acreditați internațional</h2>
+        <p class="text-center text-slate-500 mb-16 font-medium max-w-md mx-auto"><br><b>De la prima ședință ești ghidat
+                pas cu pas de profesori cu peste 25 ani experiență în predarea limbilor străine în România și Marea
+                Britanie.</b><br><br> La Centrul Educațional Superclass, transformăm învățarea într-un proces clar și
+            structurat, adaptat stilului și ritmului tău, astfel încât să îți atingi obiectivele propuse.</p>
 
         <div class="grid md:grid-cols-5 gap-10">
-            
+
             <div class="animate__animated animate__fadeInUp bg-white p-8 rounded-3xl shadow-md border-2 border-slate-100/80 hover:border-emerald-300 hover:shadow-xl hover:-translate-y-2 transition transform duration-300 group"
                 style="animation-delay: 0.2s;">
                 <div
@@ -137,7 +203,8 @@
                 <h3
                     class="text-2xl font-black mb-3 text-slate-900 group-hover:text-emerald-600 transition duration-200">
                     Metode moderne de predare:</h3>
-                <p class="text-slate-600 leading-relaxed font-medium">Îmbinăm teoria esențială cu conversația intensivă pentru o fixare rapidă și corectă a cunoștințelor.</p>
+                <p class="text-slate-600 leading-relaxed font-medium">Îmbinăm teoria esențială cu conversația intensivă
+                    pentru o fixare rapidă și corectă a cunoștințelor.</p>
             </div>
             <div class="animate__animated animate__fadeInUp bg-white p-8 rounded-3xl shadow-md border-2 border-slate-100/80 hover:border-amber-300 hover:shadow-xl hover:-translate-y-2 transition transform duration-300 group"
                 style="animation-delay: 0.4s;">
@@ -146,7 +213,8 @@
                     📚</div>
                 <h3 class="text-2xl font-black mb-3 text-slate-900 group-hover:text-amber-500 transition duration-200">
                     Curriculum național și internațional:</h3>
-                <p class="text-slate-600 leading-relaxed font-medium"> Învățarea se bazează pe ghiduri și manuale aliniate la standarde globale, completate de îndrumarea continuă a profesorului.</p>
+                <p class="text-slate-600 leading-relaxed font-medium"> Învățarea se bazează pe ghiduri și manuale
+                    aliniate la standarde globale, completate de îndrumarea continuă a profesorului.</p>
             </div>
             <div class="animate__animated animate__fadeInUp bg-white p-8 rounded-3xl shadow-md border-2 border-slate-100/80 hover:border-amber-300 hover:shadow-xl hover:-translate-y-2 transition transform duration-300 group"
                 style="animation-delay: 0.4s;">
@@ -155,7 +223,9 @@
                     ⏳</div>
                 <h3 class="text-2xl font-black mb-3 text-slate-900 group-hover:text-amber-500 transition duration-200">
                     Program structurat pentru continuitate:</h3>
-                <p class="text-slate-600 leading-relaxed font-medium"> Cursurile se desfășoară în module optimizate de minimum 2 luni – perioada recomandată pentru a-ți fixa noțiunile și a-ți crea un ritm constant de învățare.</p>
+                <p class="text-slate-600 leading-relaxed font-medium"> Cursurile se desfășoară în module optimizate de
+                    minimum 2 luni – perioada recomandată pentru a-ți fixa noțiunile și a-ți crea un ritm constant de
+                    învățare.</p>
             </div>
             <div class="animate__animated animate__fadeInUp bg-white p-8 rounded-3xl shadow-md border-2 border-slate-100/80 hover:border-amber-300 hover:shadow-xl hover:-translate-y-2 transition transform duration-300 group"
                 style="animation-delay: 0.4s;">
@@ -164,7 +234,8 @@
                     💼</div>
                 <h3 class="text-2xl font-black mb-3 text-slate-900 group-hover:text-amber-500 transition duration-200">
                     Personalizare & Pregătire examene:</h3>
-                <p class="text-slate-600 leading-relaxed font-medium">Cursuri pliate pe scopul tău: de la limbaj general și business, până la pregătire dedicată pentru examenele Cambridge și DELF</p>
+                <p class="text-slate-600 leading-relaxed font-medium">Cursuri pliate pe scopul tău: de la limbaj general
+                    și business, până la pregătire dedicată pentru examenele Cambridge și DELF</p>
             </div>
             <div
                 class="animate__animated animate__fadeInUp bg-white p-8 rounded-3xl shadow-md border-2 border-slate-100/80 hover:border-violet-300 hover:shadow-xl hover:-translate-y-2 transition transform duration-300 group">
@@ -172,36 +243,228 @@
                     class="w-14 h-14 bg-violet-100 text-violet-600 flex items-center justify-center rounded-2xl mb-6 text-2xl group-hover:animate-bounce">
                     🎯</div>
                 <h3 class="text-2xl font-black mb-3 text-slate-900 group-hover:text-violet-600 transition duration-200">
-                     Atenție maximă:</h3>
-                <p class="text-slate-600 leading-relaxed font-medium"> Grupe restrânse (maximum 6 cursanți) sau cursuri individuale 1-la-1.</p>
+                    Atenție maximă:</h3>
+                <p class="text-slate-600 leading-relaxed font-medium"> Grupe restrânse (maximum 6 cursanți) sau cursuri
+                    individuale 1-la-1.</p>
             </div>
         </div>
     </main>
 
-<footer class="bg-slate-950 border-t border-slate-800 rounded-t-[2.5rem] py-12">
-    <div class="max-w-5xl mx-auto px-6 text-center">
+    <footer class="bg-slate-950 border-t border-slate-800 rounded-t-[2.5rem] py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
 
-        <div class="mt-8 flex justify-center items-center gap-6 flex-wrap">
-    <a href="https://reclamatiisal.anpc.ro/" target="_blank">
-        <img src="images/anpc-telefon.png"
-             alt="ANPC"
-             class="h-16 w-auto rounded-lg bg-white p-2 shadow-md hover:scale-105 transition">
-    </a>
+            <div class="mt-8 flex justify-center items-center gap-6 flex-wrap">
+                <a href="https://reclamatiisal.anpc.ro/" target="_blank">
+                    <img src="images/anpc-telefon.png" alt="ANPC"
+                        class="h-16 w-auto rounded-lg bg-white p-2 shadow-md hover:scale-105 transition">
+                </a>
 
-    <a href="https://reclamatiisal.anpc.ro/" target="_blank">
-        <img src="images/anpc-sol-litigii.png"
-             alt="Soluționarea online a litigiilor"
-             class="h-16 w-auto rounded-lg bg-white p-2 shadow-md hover:scale-105 transition">
-    </a>
-</div>
+                <a href="https://reclamatiisal.anpc.ro/" target="_blank">
+                    <img src="images/anpc-sol-litigii.png" alt="Soluționarea online a litigiilor"
+                        class="h-16 w-auto rounded-lg bg-white p-2 shadow-md hover:scale-105 transition">
+                </a>
+            </div>
 
-        <div class="mt-8 pt-6 border-t border-slate-800 text-xs text-slate-500">
-            © 2026 SUPERCLASS™. Toate drepturile rezervate.
-            <br>Servicii furnizate de P.F.A. LIGIA UDREA CUI: 41596360
+            <div class="mt-8 pt-6 border-t border-slate-800 text-xs text-slate-500">
+                © 2026 SUPERCLASS™. Toate drepturile rezervate.
+                <br>Servicii furnizate de P.F.A. LIGIA UDREA CUI: 41596360
+            </div>
+
         </div>
+    </footer>
 
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner"
+        class="hidden fixed inset-x-0 bottom-0 z-[100] p-4 md:p-6">
+        <div class="max-w-5xl mx-auto rounded-3xl bg-white border border-amber-100 shadow-2xl p-6 md:p-7">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-2xl" aria-hidden="true">🍪</span>
+                        <h2 class="text-lg md:text-xl font-black text-slate-900">Folosim cookie-uri</h2>
+                    </div>
+                    <p class="text-sm leading-relaxed text-slate-600">
+                        Folosim cookie-uri necesare pentru funcționarea site-ului și, cu acordul tău,
+                        cookie-uri de analiză pentru a înțelege cum este utilizat site-ul.
+                        <a href="politica-cookie-uri.html"
+                            class="font-bold text-violet-600 hover:text-violet-800 underline underline-offset-2">
+                            Află mai multe
+                        </a>.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-2 shrink-0">
+                    <button id="cookie-settings"
+                        type="button"
+                        class="px-4 py-3 rounded-xl border border-slate-200 text-slate-700 text-sm font-bold hover:bg-slate-50 transition">
+                        Setări
+                    </button>
+                    <button id="cookie-reject"
+                        type="button"
+                        class="px-4 py-3 rounded-xl border border-slate-300 text-slate-800 text-sm font-bold hover:bg-slate-100 transition">
+                        Respinge
+                    </button>
+                    <button id="cookie-accept"
+                        type="button"
+                        class="px-4 py-3 rounded-xl bg-violet-600 text-white text-sm font-black shadow-md hover:bg-violet-700 hover:scale-[1.02] transition">
+                        Acceptă toate
+                    </button>
+                </div>
+            </div>
+
+            <div id="cookie-settings-panel" class="hidden mt-6 pt-5 border-t border-slate-100">
+                <div class="grid gap-3">
+                    <div class="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 p-4">
+                        <div>
+                            <p class="font-bold text-slate-900">Cookie-uri necesare</p>
+                            <p class="text-xs text-slate-500 mt-1">Necesare pentru funcționarea de bază a site-ului.</p>
+                        </div>
+                        <span class="text-xs font-black text-emerald-600 uppercase">Active</span>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 p-4">
+                        <div>
+                            <p class="font-bold text-slate-900">Cookie-uri de analiză</p>
+                            <p class="text-xs text-slate-500 mt-1">Ne ajută să înțelegem traficul și utilizarea site-ului prin Google Analytics.</p>
+                        </div>
+                        <button id="analytics-toggle"
+                            type="button"
+                            role="switch"
+                            aria-checked="false"
+                            class="relative w-12 h-7 rounded-full bg-slate-300 transition shrink-0"
+                            aria-label="Activează cookie-urile de analiză">
+                            <span id="analytics-toggle-knob"
+                                class="absolute left-1 top-1 w-5 h-5 rounded-full bg-white shadow transition"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <button id="cookie-save-settings"
+                    type="button"
+                    class="mt-4 w-full sm:w-auto px-5 py-3 rounded-xl bg-violet-600 text-white text-sm font-black hover:bg-violet-700 transition">
+                    Salvează preferințele
+                </button>
+            </div>
+        </div>
     </div>
-</footer>
+
+    <!-- Cookie Preferences Button -->
+    <button id="cookie-preferences"
+        type="button"
+        class="hidden fixed bottom-4 left-4 z-[90] rounded-full bg-white border border-slate-200 shadow-lg px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 transition"
+        aria-label="Deschide setările cookie">
+        🍪 Cookie-uri
+    </button>
+
+    <script>
+        (function () {
+            const STORAGE_KEY = 'superclassCookieConsent';
+            const banner = document.getElementById('cookie-banner');
+            const settingsPanel = document.getElementById('cookie-settings-panel');
+            const preferencesButton = document.getElementById('cookie-preferences');
+            const analyticsToggle = document.getElementById('analytics-toggle');
+            const analyticsToggleKnob = document.getElementById('analytics-toggle-knob');
+            const acceptButton = document.getElementById('cookie-accept');
+            const rejectButton = document.getElementById('cookie-reject');
+            const settingsButton = document.getElementById('cookie-settings');
+            const saveSettingsButton = document.getElementById('cookie-save-settings');
+
+            function setAnalyticsToggle(enabled) {
+                analyticsToggle.setAttribute('aria-checked', String(enabled));
+
+                if (enabled) {
+                    analyticsToggle.classList.remove('bg-slate-300');
+                    analyticsToggle.classList.add('bg-violet-600');
+                    analyticsToggleKnob.classList.remove('left-1');
+                    analyticsToggleKnob.classList.add('left-6');
+                } else {
+                    analyticsToggle.classList.remove('bg-violet-600');
+                    analyticsToggle.classList.add('bg-slate-300');
+                    analyticsToggleKnob.classList.remove('left-6');
+                    analyticsToggleKnob.classList.add('left-1');
+                }
+            }
+
+            function saveConsent(analytics) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    necessary: true,
+                    analytics: analytics,
+                    timestamp: new Date().toISOString()
+                }));
+
+                banner.classList.add('hidden');
+                preferencesButton.classList.remove('hidden');
+
+                if (analytics && typeof enableAnalytics === 'function') {
+                    enableAnalytics();
+                }
+            }
+
+            function showBanner(showSettings) {
+                banner.classList.remove('hidden');
+                settingsPanel.classList.toggle('hidden', !showSettings);
+            }
+
+            const storedConsent = localStorage.getItem(STORAGE_KEY);
+
+            if (storedConsent) {
+                try {
+                    const consent = JSON.parse(storedConsent);
+                    setAnalyticsToggle(Boolean(consent.analytics));
+
+                    if (consent.analytics && typeof enableAnalytics === 'function') {
+                        enableAnalytics();
+                    }
+
+                    preferencesButton.classList.remove('hidden');
+                } catch (error) {
+                    localStorage.removeItem(STORAGE_KEY);
+                    showBanner(false);
+                }
+            } else {
+                showBanner(false);
+            }
+
+            acceptButton.addEventListener('click', function () {
+                saveConsent(true);
+            });
+
+            rejectButton.addEventListener('click', function () {
+                saveConsent(false);
+            });
+
+            settingsButton.addEventListener('click', function () {
+                const isHidden = settingsPanel.classList.contains('hidden');
+                settingsPanel.classList.toggle('hidden', !isHidden);
+            });
+
+            analyticsToggle.addEventListener('click', function () {
+                const enabled = analyticsToggle.getAttribute('aria-checked') === 'true';
+                setAnalyticsToggle(!enabled);
+            });
+
+            saveSettingsButton.addEventListener('click', function () {
+                const analyticsEnabled = analyticsToggle.getAttribute('aria-checked') === 'true';
+                saveConsent(analyticsEnabled);
+            });
+
+            preferencesButton.addEventListener('click', function () {
+                const stored = localStorage.getItem(STORAGE_KEY);
+
+                if (stored) {
+                    try {
+                        const consent = JSON.parse(stored);
+                        setAnalyticsToggle(Boolean(consent.analytics));
+                    } catch (error) {
+                        setAnalyticsToggle(false);
+                    }
+                }
+
+                showBanner(true);
+            });
+        })();
+    </script>
 
 </body>
 
