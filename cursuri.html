@@ -131,43 +131,260 @@
         <h1 class="text-3xl md:text-5xl font-black tracking-tight mt-4 text-white">Ofera noastră pentru cursuri de limbi străine</h1>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-16">
-        <div class="grid md:grid-cols-2 gap-8">
-            
-            <div class="animate__animated animate__zoomIn bg-white rounded-3xl shadow-md border-2 border-slate-100 overflow-hidden flex flex-col hover:shadow-2xl hover:-translate-y-3 transition transform duration-300 group">
-                <div class="bg-gradient-to-br from-cyan-400 to-blue-500 h-44 flex items-center justify-center text-6xl select-none group-hover:scale-110 transition transform duration-300">🇬🇧</div>
-                <div class="p-8 flex-grow flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-2xl font-black mt-3 mb-2 text-slate-900">Cursuri Limba Engleză</h3>
-                        <p class="text-slate-600 font-medium text-sm leading-relaxed mb-6"></p>
-                    </div>
-                    <div class="pt-6 border-t border-slate-100 flex justify-between items-center">
-                        <div>
-                            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Preț</p>
-                            <span class="text-xl font-black text-slate-900">-</span>
-                        </div>
-                        <a href="contact.html" class="bg-slate-900 text-white font-bold text-sm px-5 py-2.5 rounded-full hover:bg-blue-500 hover:scale-110 active:scale-95 transition transform duration-200 shadow-md">Rezervă loc</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-            <div class="animate__animated animate__zoomIn bg-white rounded-3xl shadow-md border-2 border-slate-100 overflow-hidden flex flex-col hover:shadow-2xl hover:-translate-y-3 transition transform duration-300 group" style="animation-delay: 0.1s;">
-                <div class="bg-gradient-to-br from-amber-400 to-orange-500 h-44 flex items-center justify-center text-6xl select-none group-hover:scale-110 transition transform duration-300">🇫🇷</div>
-                <div class="p-8 flex-grow flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-2xl font-black mt-3 mb-2 text-slate-900">Cursuri Limba Franceză</h3>
-                    </div>
-                    <div class="pt-6 border-t border-slate-100 flex justify-between items-center">
-                        <div>
-                            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Preț</p>
-                            <span class="text-xl font-black text-slate-900">-</span>
-                        </div>
-                        <a href="contact.html" class="bg-slate-900 text-white font-bold text-sm px-5 py-2.5 rounded-full hover:bg-orange-500 hover:scale-110 active:scale-95 transition transform duration-200 shadow-md">Rezervă loc</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .pricing-wrapper {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: "Poppins", sans-serif;
+    color: #1f2937;
+  }
+
+  .pricing-card {
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+  }
+
+  .pricing-title {
+    margin: 0;
+    padding: 22px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+  }
+
+  .pricing-title span {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 4px;
+    opacity: 0.9;
+  }
+
+  .pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .pricing-table th {
+    background: #f8fafc;
+    color: #334155;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 18px 14px;
+    border-bottom: 2px solid #e2e8f0;
+    text-align: center;
+  }
+
+  .pricing-table td {
+    padding: 18px 14px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .pricing-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .pricing-table tbody tr {
+    transition: background 0.2s ease;
+  }
+
+  .pricing-table tbody tr:hover {
+    background: #f8fafc;
+  }
+
+  .category {
+    font-weight: 600;
+    color: #1e293b;
+  }
+
+  .duration {
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2563eb;
+    white-space: nowrap;
+  }
+
+  .intensive {
+    color: #7c3aed;
+  }
+
+  .table-icon {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .highlight {
+    color: #2563eb;
+  }
+
+  /* Mobile */
+  @media (max-width: 700px) {
+    .pricing-wrapper {
+      padding: 0 10px;
+    }
+
+    .pricing-title {
+      font-size: 22px;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      padding: 12px 8px;
+      font-size: 12px;
+    }
+
+    .pricing-table th {
+      font-size: 11px;
+    }
+
+    .price {
+      font-size: 13px;
+    }
+  }
+</style>
+
+
+<div class="pricing-wrapper">
+
+  <!-- GRUP -->
+  <div class="pricing-card">
+
+    <h2 class="pricing-title">
+      👥 Grup
+      <span>Minim 4 · Maxim 6 elevi</span>
+    </h2>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>
+            <span class="table-icon">🎓</span>
+            Categorie
+          </th>
+
+          <th>
+            <span class="table-icon">⏱️</span>
+            Durata ședinței
+          </th>
+
+          <th>
+            <span class="table-icon">📅</span>
+            Preț abonament<br>
+            <span class="highlight">1 ședință / săptămână</span>
+          </th>
+
+          <th>
+            <span class="table-icon">🚀</span>
+            Preț abonament<br>
+            <span class="highlight">2 ședințe / săptămână</span>
+            <br>
+            <small>(intensiv)</small>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="category">🎒 Gimnaziu / Liceu / Adulți</td>
+          <td class="duration">1h 30min</td>
+          <td class="price">650 lei</td>
+          <td class="price intensive">1300 lei</td>
+        </tr>
+
+        <tr>
+          <td class="category">🧸 Grădiniță / Primar</td>
+          <td class="duration">50 min</td>
+          <td class="price">350 lei</td>
+          <td class="price intensive">700 lei</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+
+  <!-- INDIVIDUAL -->
+  <div class="pricing-card">
+
+    <h2 class="pricing-title">
+      👤 Individual
+      <span>Ședințe personalizate</span>
+    </h2>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>
+            <span class="table-icon">🎓</span>
+            Categorie
+          </th>
+
+          <th>
+            <span class="table-icon">⏱️</span>
+            Durata ședinței
+          </th>
+
+          <th>
+            <span class="table-icon">📅</span>
+            Preț abonament<br>
+            <span class="highlight">1 ședință / săptămână</span>
+          </th>
+
+          <th>
+            <span class="table-icon">🚀</span>
+            Preț abonament<br>
+            <span class="highlight">2 ședințe / săptămână</span>
+            <br>
+            <small>(intensiv)</small>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="category">🎒 Gimnaziu / Liceu / Adulți</td>
+          <td class="duration">1h 30min</td>
+          <td class="price">1300 lei</td>
+          <td class="price intensive">2600 lei</td>
+        </tr>
+
+        <tr>
+          <td class="category">🧸 Grădiniță / Primar</td>
+          <td class="duration">50 min</td>
+          <td class="price">700 lei</td>
+          <td class="price intensive">1400 lei</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
 
 <footer class="bg-slate-950 border-t border-slate-800 rounded-t-[2.5rem] py-12">
     <div class="max-w-5xl mx-auto px-6 text-center">
